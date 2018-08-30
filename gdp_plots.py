@@ -10,19 +10,24 @@ print(sys.argv[1])
 # the columns and their gdp data becomes the rows
 
 # read data into a pandas dataframe and transpose
-filename = sys.argv[1]
-data = pandas.read_csv(filename, index_col = 'country').T
+filename_list = sys.argv[1:] # take up all arguments after the pythonfile
 
-# create a plot the transposed data
-ax = data.plot(title=filename)
+# Usage:
+# python gdp_plots.py *.csv
 
-# axes labels
-ax.set_xlabel('year')
-ax.set_ylabel('GDP per capita')
+for filename in filename_list:
+    data = pandas.read_csv(filename, index_col = 'country').T
 
-# set axes ticks
-ax.set_xticks(range(len(data.index))) # create ticks based on the data
-ax.set_xticklabels(data.index,rotation=45)
+    # create a plot the transposed data
+    ax = data.plot(title=filename)
 
-# display the plot
-plt.show()
+    # axes labels
+    ax.set_xlabel('year')
+    ax.set_ylabel('GDP per capita')
+
+    # set axes ticks
+    ax.set_xticks(range(len(data.index))) # create ticks based on the data
+    ax.set_xticklabels(data.index,rotation=45)
+
+    # display the plot
+    plt.show()
