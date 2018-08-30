@@ -16,8 +16,22 @@ import glob # getting a list of files
 # the columns and their gdp data becomes the rows
 
 # reads in the arguments as -a or filename
+
+# check number of arguments, if not correct, print message and exit the program
+if len(sys.argv)<2:
+    # no arguments supplied
+    print('Not enough arguments have been provided')
+    print('Usage: python gdp_plots.py <filename>')
+    print('Options: -a: ploy all gdp data in current directory')
+    exit() # exit the program
+
+
 if sys.argv[1]=='-a':
     filename_list = glob.glob('*gdp*.csv')
+    # check file list is not empty
+    if len(filename_list)==0:
+        print('No files found in current directory')
+        exit()
 else:
     filename_list = sys.argv[1:]
 
